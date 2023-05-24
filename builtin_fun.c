@@ -47,8 +47,7 @@ void env_function(__attribute__((unused))char *line)
 void exit_function(char *line)
 {
 	free(line);
-	print_string("\n", 1);
-	exit(1);
+	exit(EXIT_SUCCESS);
 }
 
 void (*check_builtin(char *str))(char *str)
