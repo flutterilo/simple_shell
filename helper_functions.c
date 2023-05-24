@@ -2,7 +2,6 @@
 /**
  * str_len - Computes the length of a string.
  * @str: The input string.
- *
  * Return: The length of the string.
  */
 int str_len(char *str)
