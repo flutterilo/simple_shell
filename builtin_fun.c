@@ -29,6 +29,7 @@ void cd_function(char *line)
 		chdir(param_array[1]);
 	free_array(param_array);
 }
+
 /**
  * env_function - Prints the environment variables.
  * @line: A string representing the input command line.
