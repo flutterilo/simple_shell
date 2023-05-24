@@ -1,5 +1,9 @@
 #include "shell.h"
-
+/**
+ * find_path_command - Searches for the path of a cmd in the PATH env variab.
+ * @command: The cmd to search for.
+ * Return: The full path of the command if found,or NULL if not found
+ */
 char *find_path_command(char *command)
 {
 	char *str = "PATH";
@@ -31,7 +35,11 @@ char *find_path_command(char *command)
 
 	return (constructed);
 }
-
+/**
+ * find_path - Finds the index of an environment variable in the environ array
+ * @str: The environment variable to find.
+ * Return: The index of the environment variable if found, or -1 if not found.
+ */
 int find_path(char *str)
 {
 	int i;
@@ -51,7 +59,12 @@ int find_path(char *str)
 	}
 	return (-1);
 }
-
+/**
+ * tokenize_path - Tokenizes the value of the PATH environment variable.
+ * @index: The index of the PATH environment variable in the `environ` array.
+ * @str: The PATH environment variable.
+ * Return: An array of path tokens if successful, or NULL on failure.
+ */
 char **tokenize_path(int index, char *str)
 {
 	char *env_value;
@@ -69,7 +82,12 @@ char **tokenize_path(int index, char *str)
 
 	return (path_tokens);
 }
-
+/**
+ * search_directories - Searche for cmd in the dir specified by the path token
+ * @path_tokens: The array of path tokens.
+ * @command: The command to search for.
+ * Return:The directory that contain the cmd if found, or NULL if not found.
+ */
 char *search_directories(char **path_tokens, char *command)
 {
 	int i, s;
@@ -105,6 +123,12 @@ char *search_directories(char **path_tokens, char *command)
 	return (NULL);
 }
 
+/**
+ * build_path - Constructs the full path of a command.
+ * @directory: The directory containing the command.
+ * @command: The command name.
+ * Return: The full path of the command if successful, or NULL on failure.
+ */
 char *build_path(char *directory, char *command)
 {
 	int i, j;
