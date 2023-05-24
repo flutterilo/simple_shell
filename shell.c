@@ -1,10 +1,9 @@
 #include "shell.h"
-
 /**
  * main - Entry point of the program.
- * @ac: The number of parameters passed to the executable file. In the case
+ * @argc: The number of parameters passed to the executable file. In the case
  * this variable will not be used.
- * @av: The name of the program.
+ * @argv: The name of the program.
  * Return: Always 0.
  */
 int main(__attribute__((unused)) int argc, char **argv)
