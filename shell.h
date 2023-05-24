@@ -15,6 +15,11 @@
 #define PROMPT "$ "
 
 
+/**
+ * struct builtin_d - Represents a built-in command
+ * @built: Name of the built-in command
+ * @f: Function pointer to the corresponding built-in function
+ */
 typedef struct builtin_d
 {
 	char *built;
