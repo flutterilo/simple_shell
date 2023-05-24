@@ -5,11 +5,12 @@
 *@line:command line
 *@n:length
 */
-void parse_line(char **argv, char *line, size_t n, int *command_count)
+void parse_line(char **argv, char *line, size_t n, int command_count)
 {
 	ssize_t check;
 	char **array_param;
-	char *file_path;
+	int i = 0;
+	(void) command_count;
 
 	if (isatty(STDIN_FILENO))
 		print_string(PROMPT);
@@ -17,38 +18,37 @@ void parse_line(char **argv, char *line, size_t n, int *command_count)
 	check = getline(&line, &n, stdin);
 	if (check == -1)
 	{
+		free(line);
 		exit(1);
-	}
-	array_param = tokenization(line);
-	if (built_in(array_param, line))
-	{
-		free_array_line(array_param, line);
-		return;
-	}
-	file_path = locate_path(array_param[0]);
-	if (file_path)
-	{
-		if (file_path != array_param[0])
-		{
-			free(array_param[0]);
-			array_param[0] = file_path;
-		}
-		execute_child(array_param, argv);
 	}
 	else
 	{
-		print_string(argv[0]);
-		print_string(": ");
-		print_int(*command_count);
-		print_string(": ");
-		print_string(array_param[0]);
-		print_string(": ");
-		print_string("not found\n");
+		while (line[i] != '\n')
+			i++;
+		line[i] = '\0';
+		if (_strcmp(line, "exit") == 0)
+		{
+			free(line);
+			exit(1);
+		}
+		array_param = tokenization(line);
+		if (array_param[0] == NULL)
+		{
+			free(array_param);
+			free(line);
+			return;
+		}
+		execute_child(array_param, argv, command_count);
+		i = 0;
+		while (array_param[i])
+		{
+			free(array_param[i]);
+			i++;
+		}
+		free(array_param);
+		free(line);
 	}
 
-	(*command_count)++;
-
-	free_array_line(array_param, line);
 }
 
 /**
@@ -68,7 +68,17 @@ char **tokenization(char *line)
 
 	str_copy = _strdup(line);
 	length = count_tokens(str_copy);
-	array_param = malloc((sizeof(char *)) * length + 1);
+	if (length == -1)
+	{
+		free(str_copy);
+		return (NULL);
+	}
+	array_param = malloc((sizeof(char *)) * (length + 1));
+	if (array_param == NULL)
+	{
+		free(str_copy);
+		return (NULL);
+	}
 	token = strtok(str_copy, DELIM_PROMPT);
 
 	while (token != NULL)
@@ -94,6 +104,8 @@ int count_tokens(char *str_copy)
 	int length = 0;
 
 	str_copy_up = _strdup(str_copy);
+	if (str_copy_up == NULL)
+		return (-1);
 	token = strtok(str_copy_up, DELIM_PROMPT);
 
 	while (token != NULL)

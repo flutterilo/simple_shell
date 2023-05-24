@@ -12,6 +12,7 @@ int built_in(char **array_param, char *line)
 	int i = 0;
 
 	builtin_t built_arr[] = {
+		{"exit", exit_built},
 		{"env", env_built},
 		{NULL, NULL}
 	};

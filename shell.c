@@ -7,13 +7,17 @@
 */
 int main(__attribute__((unused)) int argc, char **argv)
 {
-	char *line = NULL;
+	char *line;
 	size_t n = 0;
-	int command_count = 1;
+	int command_count = 0;
 
+	/*signal(SIGINT, SIG_IGN);*/
 	while (1)
 	{
-		parse_line(argv, line, n, &command_count);
+		line = NULL;
+		n = 0;
+		command_count++;
+		parse_line(argv, line, n, command_count);
 	}
 	return (0);
 }

@@ -11,7 +11,7 @@
 
 
 #define PROMPT "$ "
-#define DELIM_PROMPT " \n\t"
+#define DELIM_PROMPT " \t"
 extern char **environ;
 
 
@@ -41,14 +41,14 @@ typedef struct listint_s
 } listint_t;
 
 
-void parse_line(char **argv, char *line, size_t n, int *command_count);
+void parse_line(char **argv, char *line, size_t n, int command_count);
 void print_char(char c);
 void print_string(char *str);
 int str_len(char *str);
 char *_strdup(char *str);
 char **tokenization(char *line);
 int count_tokens(char *str_copy);
-void execute_child(char **array_param, char **argv);
+void execute_child(char **array_param, char **argv, int command_count);
 char *_getenv(const char *name);
 int is_exist(const char *file_name);
 char *locate_path(const char *name);
