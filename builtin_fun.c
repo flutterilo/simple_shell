@@ -1,5 +1,8 @@
 #include "shell.h"
-
+/**
+ * cd_function - Handles the "cd" (change directory) command.
+ * @line: A string representing the input command line.
+ */
 void cd_function(char *line)
 {
 	int index;
@@ -26,7 +29,10 @@ void cd_function(char *line)
 		chdir(param_array[1]);
 	free_array(param_array);
 }
-
+/**
+ * env_function - Prints the environment variables.
+ * @line: A string representing the input command line.
+ */
 void env_function(__attribute__((unused))char *line)
 {
 	int i;
@@ -41,15 +47,20 @@ void env_function(__attribute__((unused))char *line)
 }
 
 /**
- * exit_b - Exits the shell. After freeing allocated resources.
- * @line: A string representing the input from the user.
+ * exit_function - Exits the shell, freeing allocated resources.
+ * @line: A string representing the input command line.
  */
 void exit_function(char *line)
 {
 	free(line);
 	exit(EXIT_SUCCESS);
 }
-
+/**
+ * check_builtin - Checks if a command is a built-in command.
+ * @str: The command to check.
+ *
+ * Return: A func ptr to the built in function, or NULL if not found.
+ */
 void (*check_builtin(char *str))(char *str)
 {
 	int i;
@@ -70,6 +81,13 @@ void (*check_builtin(char *str))(char *str)
 	}
 	return (NULL);
 }
+/**
+ * built_in - Executes a built-in command.
+ * @command: An array of strings representing the command and its arguments.
+ * @line: A string representing the input command line.
+ *
+ * Return: 0 if the command is a built in and executed , -1 otherwise.
+ */
 
 int built_in(char **command, char *line)
 {
