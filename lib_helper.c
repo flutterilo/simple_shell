@@ -1,5 +1,11 @@
 #include "shell.h"
-
+/**
+ * _strcmp - Compares two strings.
+ * @s1: The first string.
+ * @s2: The second string.
+ * Return: An integer less than, equal to, or greater than zero if s1 is found
+ * respectively, to be less than, to match, or be greater than s2.
+ */
 int _strcmp(char *s1, char *s2)
 {
 	int i = 0;
@@ -15,6 +21,12 @@ int _strcmp(char *s1, char *s2)
 	return (s1[i] - s2[i]);
 }
 
+/**
+ * _strdup - Duplicates a string.
+ * @src: The source string to be duplicated.
+ * Return: A pointer to the duplicated string,
+ * or NULL if memory allocation fails.
+ */
 char *_strdup(char *src)
 {
 	int i = 0;
@@ -33,6 +45,11 @@ char *_strdup(char *src)
 	return (dest);
 }
 
+/**
+ * print_string - Prints a string to the standard output.
+ * @str: The string to be printed.
+ * @new_line: A flag indicating whether to print a new line after the string.
+ */
 void print_string(char *str, int new_line)
 {
 	int i;
@@ -44,12 +61,12 @@ void print_string(char *str, int new_line)
 	if (new_line == 0)
 		write(STDOUT_FILENO, "\n", 1);
 }
-
 /**
- * _write_char - Writes a character to stdout
- * @c: Character that will be written to stdout
- * Return: Upon success how many characters were written.
+ * print_char - Writes a character to the standard output.
+ * @c: The character to be written.
+ * Return: Upon success, the number of characters written.
  */
+
 int print_char(char c)
 {
 	return (write(1, &c, 1));
