@@ -1,6 +1,11 @@
 #include "shell.h"
-
-
+/**
+ * parse_line - Parses line of input into tokens,executes the appropriate cmd
+ * @line: The line of input to parse.
+ * @n: The size of the line buffer.
+ * @command_count: The count of the executed commands.
+ * @argv: The command-line arguments.
+ */
 void parse_line(char *line, size_t n, int command_count, char **argv)
 {
 	int i;
@@ -31,6 +36,13 @@ void parse_line(char *line, size_t n, int command_count, char **argv)
 	else
 		exit_function(line);
 }
+/**
+ * create_child - Creates a child process to execute a command.
+ * @param_array: The array of command and arguments.
+ * @line: The line of input.
+ * @count: The count of the executed commands.
+ * @argv: The command-line arguments.
+ */
 
 void create_child(char **param_array, char *line, int count, char **argv)
 {
@@ -69,7 +81,13 @@ void create_child(char **param_array, char *line, int count, char **argv)
 	else
 		wait(&status);
 }
-
+/**
+ * tokenization - Tokenizes a line of input using the specified delimiter.
+ * @line: The line of input to tokenize.
+ * @delim: The delimiter to use for tokenization.
+ * @token_count: The count of tokens.
+ * Return: An array of tokens if successful, or NULL on failure.
+ */
 char **tokenization(char *line, const char *delim, int token_count)
 {
 	char **param_array;
@@ -90,6 +108,13 @@ char **tokenization(char *line, const char *delim, int token_count)
 	return (param_array);
 }
 
+/**
+ * tokenize_line - Tokenizes a line of input into an array of tokens.
+ * @token_count: The count of tokens.
+ * @line: The line of input to tokenize.
+ * @delim: The delimiter to use for tokenization.
+ * Return: An array of tokens if successful, or NULL on failure.
+ */
 char **tokenize_line(int token_count, char *line, const char *delim)
 {
 	int i;
@@ -111,7 +136,12 @@ char **tokenize_line(int token_count, char *line, const char *delim)
 	free(line_cp);
 	return (array_param);
 }
-
+/**
+ * count_token - Counts the numb of tokens in line of input
+ * @line: The line of input.
+ * @delim: The delimiter to use for counting tokens.
+ * Return: The count of tokens if successful, or -1 on failure.
+ */
 int count_token(char *line, const char *delim)
 {
 	char *str;
