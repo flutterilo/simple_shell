@@ -59,7 +59,6 @@ void exit_function(char *line)
 /**
  * check_builtin - Checks if a command is a built-in command.
  * @str: The command to check.
- *
  * Return: A func ptr to the built in function, or NULL if not found.
  */
 void (*check_builtin(char *str))(char *str)
@@ -86,7 +85,6 @@ void (*check_builtin(char *str))(char *str)
  * built_in - Executes a built-in command.
  * @command: An array of strings representing the command and its arguments.
  * @line: A string representing the input command line.
- *
  * Return: 0 if the command is a built in and executed , -1 otherwise.
  */
 
