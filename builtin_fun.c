@@ -54,7 +54,7 @@ void env_function(__attribute__((unused))char *line)
 void exit_function(char *line)
 {
 	free(line);
-	exit(2);
+	exit(EXIT_SUCCESS);
 }
 /**
  * check_builtin - Checks if a command is a built-in command.
