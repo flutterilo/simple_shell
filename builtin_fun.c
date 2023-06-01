@@ -43,6 +43,17 @@ void exit_builtin(char **argv, char *command, char **arr_tok, int *exit_status, 
 			i++;
 		}
 		num = _atoi(arr_tok[1]);
+		if (num < 0)
+		{
+				print_error(argv[0]);
+				print_error(": ");
+				print_integer(n);
+				print_error(": exit: Illegal number: ");
+				print_error(arr_tok[1]);
+				print_error("\n");
+				free_comand_array(command, arr_tok);
+				exit(2);
+		}
 		free_comand_array(command, arr_tok);
 		exit(num);
 	}
